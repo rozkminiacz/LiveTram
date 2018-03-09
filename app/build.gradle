@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'realm-android'
+
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "27.0.3"
+    defaultConfig {
+        applicationId "me.rozkmin.livetram"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            force "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
+            force "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
+
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir}/generated/source/kapt/main"
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+    }
+}
+
+kapt {
+    generateStubs = true
+    correctErrorTypes = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile supportDependencies.values()
+
+    kapt dataBinding.kapt
+
+    compile kotlinDependencies.values()
+    compile supportDependencies.values()
+    compile rxJavaDependencies.values()
+    compile retrofitDependencies.values()
+    compile imageDependencies.compile
+    kapt imageDependencies.kapt
+
+    provided daggerDependencies.daggerProvided
+    compile daggerDependencies.daggerCompile
+    kapt daggerDependencies.daggerKapt
+
+    compile mapsDependencies.googleMapsCore
+
+
+    testCompile unitTestDependencies.values()
+    testCompile kotlinTestDependencies.values()
+    testCompile spekDependencies.values()
+
+}

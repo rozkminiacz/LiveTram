@@ -1,0 +1,51 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map_container"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.SearchView
+                    android:id="@+id/activity_map_search_stop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:searchIcon="@drawable/stop"
+                    app:queryHint="Search stops by name"
+                    app:defaultQueryHint="Search stops"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent"
+                    android:layout_marginEnd="15dp"
+                    android:padding="2dp"/>
+
+                <android.support.v7.widget.SearchView
+                    android:id="@+id/activity_map_search_tram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:searchIcon="@drawable/tram_icon"
+                    app:queryHint="Search stops by name"
+                    app:defaultQueryHint="Search stops"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
